@@ -1,4 +1,7 @@
+package algorithmic_task;
+
 import java.util.*;
+
 
 public class AlgorithmicTask {
 
@@ -6,38 +9,22 @@ public class AlgorithmicTask {
         List<String> s1 = new ArrayList<>(Arrays.asList(sentence1.split(" ")));
         List<String> s2 = new ArrayList<>(Arrays.asList(sentence2.split(" ")));
 
-        if (s1.size() != s2.size()) return false;
+        if (s1.size() != s2.size() || s1.size() == 0) return false;
 
-        for (int i = 0; i < s1.size(); i++) {
-            for (Set temp : dictionary) {
-                if (temp.contains(s1.get(i))) {
-                    if (temp.contains(s2.get(i))) break;
-                    else return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public boolean areSimilarVersion2(List<Set<String>> dictionary, String sentence1, String sentence2) {
-        List<String> s1 = new ArrayList<>(Arrays.asList(sentence1.split(" ")));
-        List<String> s2 = new ArrayList<>(Arrays.asList(sentence2.split(" ")));
-
-        if (s1.size() != s2.size()) return false;
-
-        Map<String, Integer> dictionary2 = new HashMap<>();
+        Map<String, Integer> mapDictionary = new HashMap<>();
 
         for (int i = 0; i < dictionary.size(); i++) {
             for (String dic : dictionary.get(i)) {
-                dictionary2.put(dic, i);
+                mapDictionary.put(dic, i);
             }
         }
 
-        for (int i = 0; i < s1.size(); i++) {
-            if (dictionary2.containsKey(s1.get(i)) && dictionary2.containsKey(s2.get(i))) {
-                if (!dictionary2.get(s1.get(i)).equals(dictionary2.get(s2.get(i)))) return false;
-            }
-        }
+
+
+
+        for (int i = 0; i < s1.size(); i++)
+            if (!mapDictionary.getOrDefault(s1.get(i), -1).equals(mapDictionary.getOrDefault(s2.get(i), -2)))
+                return false;
         return true;
     }
 
@@ -93,13 +80,6 @@ public class AlgorithmicTask {
         String s7 = "kk first second";
         String s8 = "one kk wow";
         System.out.println(algorithmicTask.areSimilar(dictionary2, s7, s8));
-
-
-        System.out.println("Version 2:");
-        System.out.println(algorithmicTask.areSimilarVersion2(dictionary1, s1, s2));
-        System.out.println(algorithmicTask.areSimilarVersion2(dictionary1, s3, s4));
-        System.out.println(algorithmicTask.areSimilarVersion2(dictionary1, s5, s6));
-        System.out.println(algorithmicTask.areSimilarVersion2(dictionary2, s7, s8));
 
     }
 
