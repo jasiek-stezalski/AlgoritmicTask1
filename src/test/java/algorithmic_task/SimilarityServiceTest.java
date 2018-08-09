@@ -1,6 +1,5 @@
-import algorithmic_task.Dictionary;
-import algorithmic_task.DictionaryImpl;
-import algorithmic_task.SimilarityServiceImpl;
+package algorithmic_task;
+
 import org.junit.Before;
 import org.junit.Test;
 
