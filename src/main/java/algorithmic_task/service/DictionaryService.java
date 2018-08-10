@@ -1,10 +1,10 @@
-package algorithmic_task;
+package algorithmic_task.service;
 
 /**
  * Created by jstezalski on 01/08/2018.
  *
  */
-public interface Dictionary<T> {
+public interface DictionaryService<T> {
 
     void init();
 

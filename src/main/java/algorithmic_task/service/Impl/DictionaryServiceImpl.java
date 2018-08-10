@@ -1,5 +1,6 @@
-package algorithmic_task;
+package algorithmic_task.service.Impl;
 
+import algorithmic_task.service.DictionaryService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -7,12 +8,13 @@ import java.util.*;
 
 /**
  * Created by jstezalski on 20/07/2018.
- * */
+ *
+ */
 @Component
-public class DictionaryImpl implements Dictionary<List<Set<String>>> {
+public class DictionaryServiceImpl implements DictionaryService<List<Set<String>>> {
 
     /**
-     * Dictionary is represented as List of Sets.
+     * DictionaryService is represented as List of Sets.
      * Inside every set are words considered to be similar.
      * Each word can be only inside one set.
      */

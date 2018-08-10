@@ -1,5 +1,6 @@
 package algorithmic_task;
 
+import algorithmic_task.controller.SimilarityController;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

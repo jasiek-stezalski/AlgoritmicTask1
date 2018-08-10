@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="jstezalski" context="default" runOnChange="true">
+
+        <sql>INSERT INTO dictionary_set (id, content, id_dictionary) VALUES (1, 'mother mom hwefhewf', 1)</sql>
+        <sql>INSERT INTO dictionary_set (id, content, id_dictionary) VALUES (2, 'house home',          1)</sql>
+        <sql>INSERT INTO dictionary_set (id, content, id_dictionary) VALUES (3, 'in',                  1)</sql>
+        <sql>INSERT INTO dictionary_set (id, content, id_dictionary) VALUES (4, 'first one kk',        2)</sql>
+        <sql>INSERT INTO dictionary_set (id, content, id_dictionary) VALUES (5, 'second wow',          2)</sql>
+    </changeSet>
+
+</databaseChangeLog>
+

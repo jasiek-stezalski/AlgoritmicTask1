@@ -1,5 +1,7 @@
-package algorithmic_task;
+package algorithmic_task.service.Impl;
 
+import algorithmic_task.service.DictionaryService;
+import algorithmic_task.service.SimilarityService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,12 +13,11 @@ import java.util.*;
 @Service
 public class SimilarityServiceImpl implements SimilarityService {
 
-    private final Dictionary dictionary;
+    private DictionaryService<List<Set<String>>> dictionaryService;
 
-    public SimilarityServiceImpl(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    public SimilarityServiceImpl(DictionaryService<List<Set<String>>> dictionaryService) {
+        this.dictionaryService = dictionaryService;
     }
-
 
     /**
      * The method checks if the sentences are similar.
@@ -37,8 +38,8 @@ public class SimilarityServiceImpl implements SimilarityService {
 
         Map<String, Integer> mapDictionary = new HashMap<>();
 
-        for (int i = 0; i < ((List<Set<String>>) dictionary.getDictionary()).size(); i++) {
-            for (String dic : ((List<Set<String>>) dictionary.getDictionary()).get(i)) {
+        for (int i = 0; i < (dictionaryService.getDictionary()).size(); i++) {
+            for (String dic : (dictionaryService.getDictionary()).get(i)) {
                 mapDictionary.put(dic, i);
             }
         }
@@ -51,5 +52,4 @@ public class SimilarityServiceImpl implements SimilarityService {
     }
 
 }
-
 
