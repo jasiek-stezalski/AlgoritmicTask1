@@ -12,7 +12,7 @@ import java.util.List;
 public class Dictionary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long id;
 
@@ -22,7 +22,6 @@ public class Dictionary {
     @OneToMany
     @JoinColumn(name = "ID_DICTIONARY")
     private List<DictionarySet> dictionarySets;
-
 
     public Long getId() {
         return id;
