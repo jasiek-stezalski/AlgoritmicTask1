@@ -8,8 +8,14 @@
 
     <changeSet id="1" author="jstezalski" context="default" runOnChange="true">
 
-        <sql>INSERT INTO dictionary (id, name) VALUES (1, 'dictionary1')</sql>
-        <sql>INSERT INTO dictionary (id, name) VALUES (2, 'dictionary2')</sql>
+        <insert tableName="dictionary">
+            <column name="id" value="1"/>
+            <column name="name" value="dictionary1"/>
+        </insert>
+        <insert tableName="dictionary">
+            <column name="id" value="2"/>
+            <column name="name" value="dictionary2"/>
+        </insert>
 
     </changeSet>
 
