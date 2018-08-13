@@ -1,6 +1,7 @@
 package algorithmic_task.service.Impl;
 
 import algorithmic_task.service.DictionaryService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +12,8 @@ import java.util.*;
  *
  */
 @Component
-public class DictionaryServiceImpl implements DictionaryService<List<Set<String>>> {
+@Profile("default")
+public class DictionaryServiceImpl implements DictionaryService<Map<String, Integer>> {
 
     /**
      * DictionaryService is represented as List of Sets.
@@ -44,8 +46,16 @@ public class DictionaryServiceImpl implements DictionaryService<List<Set<String>
     }
 
     @Override
-    public List<Set<String>> getDictionary() {
-        return Collections.unmodifiableList(dictionary);
+    public Map<String, Integer> getDictionary() {
+        Map<String, Integer> mapDictionary = new HashMap<>();
+
+        for (int i = 0; i < dictionary.size(); i++) {
+            for (String dic : (dictionary.get(i))) {
+                mapDictionary.put(dic, i);
+            }
+        }
+
+        return Collections.unmodifiableMap(mapDictionary);
     }
 
 }

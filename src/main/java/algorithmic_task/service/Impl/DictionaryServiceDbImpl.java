@@ -4,19 +4,21 @@ import algorithmic_task.domain.Dictionary;
 import algorithmic_task.domain.DictionarySet;
 import algorithmic_task.repository.DictionaryRepository;
 import algorithmic_task.service.DictionaryService;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
-
-
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Created by jstezalski on 10/08/2018.
+ *
  */
 @Component
-@Primary
-public class DictionaryServiceDbImpl implements DictionaryService<List<Set<String>>> {
+@Profile("database")
+public class DictionaryServiceDbImpl implements DictionaryService<Map<String, Integer>> {
 
     public static final String DICTIONARY_NAME = "dictionary1";
 
@@ -31,23 +33,31 @@ public class DictionaryServiceDbImpl implements DictionaryService<List<Set<Strin
     }
 
     /**
-     * Method take Dictionary from database and change it to List of Set of Strings.
+     * Method take Dictionary from database and change it to Map of word as a values and index of set as a keys.
      * We can change dictionary by changing DICTIONARY_NAME.
+     *
      * @return dictionary in correct form.
      */
     @Override
-    public List<Set<String>> getDictionary() {
+    public Map<String, Integer> getDictionary() {
         Dictionary dictionary = dictionaryRepository.findByName(DICTIONARY_NAME);
 
-        List<Set<String>> newDictionary = new ArrayList<>();
+        Map<String, Integer> mapDictionary = new HashMap<>();
+        HashSet<String> setOfWords;
+
+        int indexOfSet = 0;
 
         for (DictionarySet set : dictionary.getDictionarySets()) {
-            List<String> s1 = new ArrayList<>(Arrays.asList(set.getContent().split(" ")));
-            Set<String> set1 = new HashSet<>(s1);
-            newDictionary.add(set1);
+            setOfWords = new HashSet<>(Arrays.asList(set.getContent().split(" ")));
+
+            for (String word : setOfWords) {
+                mapDictionary.put(word, indexOfSet);
+            }
+
+            indexOfSet++;
         }
 
-        return newDictionary;
+        return mapDictionary;
     }
 
 }

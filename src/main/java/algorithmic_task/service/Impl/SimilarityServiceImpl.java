@@ -13,9 +13,9 @@ import java.util.*;
 @Service
 public class SimilarityServiceImpl implements SimilarityService {
 
-    private DictionaryService<List<Set<String>>> dictionaryService;
+    private DictionaryService<Map<String, Integer>> dictionaryService;
 
-    public SimilarityServiceImpl(DictionaryService<List<Set<String>>> dictionaryService) {
+    public SimilarityServiceImpl(DictionaryService<Map<String, Integer>> dictionaryService) {
         this.dictionaryService = dictionaryService;
     }
 
@@ -36,16 +36,10 @@ public class SimilarityServiceImpl implements SimilarityService {
 
         if (s1.size() != s2.size() || s1.size() == 0) return false;
 
-        Map<String, Integer> mapDictionary = new HashMap<>();
-
-        for (int i = 0; i < (dictionaryService.getDictionary()).size(); i++) {
-            for (String dic : (dictionaryService.getDictionary()).get(i)) {
-                mapDictionary.put(dic, i);
-            }
-        }
+        Map<String, Integer> dictionary = dictionaryService.getDictionary();
 
         for (int i = 0; i < s1.size(); i++)
-            if (!mapDictionary.getOrDefault(s1.get(i), -1).equals(mapDictionary.getOrDefault(s2.get(i), -2)))
+            if (!dictionary.getOrDefault(s1.get(i), -1).equals(dictionary.getOrDefault(s2.get(i), -2)))
                 return false;
 
         return true;
