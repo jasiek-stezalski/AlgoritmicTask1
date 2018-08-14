@@ -12,16 +12,22 @@ import java.util.List;
 public class Dictionary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long id;
 
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "ID_DICTIONARY")
+    @OneToMany(mappedBy = "dictionary", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<DictionarySet> dictionarySets;
+
+    public Dictionary() {
+    }
+
+    public Dictionary(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -74,5 +80,4 @@ public class Dictionary {
                 ", dictionarySets=" + dictionarySets +
                 '}';
     }
-
 }

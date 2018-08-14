@@ -11,12 +11,24 @@ import javax.persistence.*;
 public class DictionarySet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long id;
 
     @Column(name = "CONTENT", nullable = false)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_DICTIONARY")
+    private Dictionary dictionary;
+
+    public DictionarySet() {
+    }
+
+    public DictionarySet(Long id, String content, Dictionary dictionary) {
+        this.id = id;
+        this.content = content;
+        this.dictionary = dictionary;
+    }
 
     public Long getId() {
         return id;
@@ -34,6 +46,14 @@ public class DictionarySet {
         this.content = content;
     }
 
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,7 +61,7 @@ public class DictionarySet {
 
         DictionarySet that = (DictionarySet) o;
 
-        return !(id != null ? !id.equals(that.id) : that.id != null) && !(content != null ? !content.equals(that.content) : that.content != null);
+        return !(id != null ? !id.equals(that.id) : that.id != null) && !(content != null ? !content.equals(that.content) : that.content != null) && !(dictionary != null ? !dictionary.equals(that.dictionary) : that.dictionary != null);
 
     }
 
@@ -49,6 +69,7 @@ public class DictionarySet {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (dictionary != null ? dictionary.hashCode() : 0);
         return result;
     }
 
@@ -57,6 +78,7 @@ public class DictionarySet {
         return "DictionarySet{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
+                ", dictionary=" + dictionary +
                 '}';
     }
 
