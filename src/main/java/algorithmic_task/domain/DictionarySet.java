@@ -61,16 +61,13 @@ public class DictionarySet {
 
         DictionarySet that = (DictionarySet) o;
 
-        return !(id != null ? !id.equals(that.id) : that.id != null) && !(content != null ? !content.equals(that.content) : that.content != null) && !(dictionary != null ? !dictionary.equals(that.dictionary) : that.dictionary != null);
+        return !(id != null ? !id.equals(that.id) : that.id != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (dictionary != null ? dictionary.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
