@@ -1,4 +1,4 @@
-package algorithmic_task;
+package algorithmic_task.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

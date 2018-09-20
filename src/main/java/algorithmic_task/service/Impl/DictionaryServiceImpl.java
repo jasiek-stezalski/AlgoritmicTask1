@@ -1,5 +1,7 @@
-package algorithmic_task;
+package algorithmic_task.service.Impl;
 
+import algorithmic_task.service.DictionaryService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -7,12 +9,14 @@ import java.util.*;
 
 /**
  * Created by jstezalski on 20/07/2018.
- * */
+ *
+ */
 @Component
-public class DictionaryImpl implements Dictionary<List<Set<String>>> {
+@Profile("default")
+public class DictionaryServiceImpl implements DictionaryService<Map<String, Integer>> {
 
     /**
-     * Dictionary is represented as List of Sets.
+     * DictionaryService is represented as List of Sets.
      * Inside every set are words considered to be similar.
      * Each word can be only inside one set.
      */
@@ -42,8 +46,16 @@ public class DictionaryImpl implements Dictionary<List<Set<String>>> {
     }
 
     @Override
-    public List<Set<String>> getDictionary() {
-        return Collections.unmodifiableList(dictionary);
+    public Map<String, Integer> getDictionary() {
+        Map<String, Integer> mapDictionary = new HashMap<>();
+
+        for (int i = 0; i < dictionary.size(); i++) {
+            for (String dic : (dictionary.get(i))) {
+                mapDictionary.put(dic, i);
+            }
+        }
+
+        return Collections.unmodifiableMap(mapDictionary);
     }
 
 }

@@ -1,22 +1,25 @@
-package algorithmic_task;
+package algorithmic_task.service.Impl;
 
+import algorithmic_task.service.DictionaryService;
+import algorithmic_task.service.SimilarityService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jstezalski on 19/07/2018.
- *
  */
 @Service
 public class SimilarityServiceImpl implements SimilarityService {
 
-    private final Dictionary dictionary;
+    private DictionaryService<Map<String, Integer>> dictionaryService;
 
-    public SimilarityServiceImpl(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    public SimilarityServiceImpl(DictionaryService<Map<String, Integer>> dictionaryService) {
+        this.dictionaryService = dictionaryService;
     }
-
 
     /**
      * The method checks if the sentences are similar.
@@ -35,21 +38,18 @@ public class SimilarityServiceImpl implements SimilarityService {
 
         if (s1.size() != s2.size() || s1.size() == 0) return false;
 
-        Map<String, Integer> mapDictionary = new HashMap<>();
-
-        for (int i = 0; i < ((List<Set<String>>) dictionary.getDictionary()).size(); i++) {
-            for (String dic : ((List<Set<String>>) dictionary.getDictionary()).get(i)) {
-                mapDictionary.put(dic, i);
-            }
-        }
+        Map<String, Integer> dictionary = dictionaryService.getDictionary();
 
         for (int i = 0; i < s1.size(); i++)
-            if (!mapDictionary.getOrDefault(s1.get(i), -1).equals(mapDictionary.getOrDefault(s2.get(i), -2)))
+            /*
+              If the word from the sentence isn't in dictionary method should return Integer,
+              but if both sentences aren't in dictionary this Integers should be different.
+              That is why default values are -1 and -2.
+             */
+            if (!dictionary.getOrDefault(s1.get(i), -1).equals(dictionary.getOrDefault(s2.get(i), -2)))
                 return false;
 
         return true;
     }
 
 }
-
-

@@ -1,5 +1,7 @@
 package algorithmic_task;
 
+import algorithmic_task.controller.SimilarityController;
+import algorithmic_task.service.SimilarityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

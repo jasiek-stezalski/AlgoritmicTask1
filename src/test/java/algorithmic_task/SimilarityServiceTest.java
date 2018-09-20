@@ -1,5 +1,7 @@
 package algorithmic_task;
 
+import algorithmic_task.service.Impl.DictionaryServiceImpl;
+import algorithmic_task.service.Impl.SimilarityServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +18,9 @@ public class SimilarityServiceTest {
 
     @Before
     public void before() {
-        Dictionary dictionary = new DictionaryImpl();
-        dictionary.init();
-        similarityService = new SimilarityServiceImpl(dictionary);
+        DictionaryServiceImpl dictionaryService = new DictionaryServiceImpl();
+        dictionaryService.init();
+        similarityService = new SimilarityServiceImpl(dictionaryService);
     }
 
     @Test
