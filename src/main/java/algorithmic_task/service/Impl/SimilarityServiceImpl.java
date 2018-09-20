@@ -4,11 +4,13 @@ import algorithmic_task.service.DictionaryService;
 import algorithmic_task.service.SimilarityService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jstezalski on 19/07/2018.
- *
  */
 @Service
 public class SimilarityServiceImpl implements SimilarityService {
@@ -39,6 +41,11 @@ public class SimilarityServiceImpl implements SimilarityService {
         Map<String, Integer> dictionary = dictionaryService.getDictionary();
 
         for (int i = 0; i < s1.size(); i++)
+            /*
+              If the word from the sentence isn't in dictionary method should return Integer,
+              but if both sentences aren't in dictionary this Integers should be different.
+              That is why default values are -1 and -2.
+             */
             if (!dictionary.getOrDefault(s1.get(i), -1).equals(dictionary.getOrDefault(s2.get(i), -2)))
                 return false;
 
@@ -46,4 +53,3 @@ public class SimilarityServiceImpl implements SimilarityService {
     }
 
 }
-
